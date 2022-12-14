@@ -75,6 +75,7 @@ class PaycorpSampathVault
                 $this->response['msg'] = 'Payment init request failed';
             }
         } catch (\Exception $e) {
+            report($e);
             $this->response['status'] = false;
             $this->response['msg'] = $e->getMessage();
         }
@@ -111,6 +112,7 @@ class PaycorpSampathVault
             $this->response['AuthCode'] = $realTimeResponse->getAuthCode() ?: '';
             $this->response['status'] = true;
         } catch(\Exception $e) {
+            report($e);
             $this->response['status'] = false;
             $this->response['msg'] = $e->getMessage();
         }
@@ -144,6 +146,7 @@ class PaycorpSampathVault
             $this->response['Token'] = $completeResponse->getToken();
             $this->response['status'] = true;
         }catch (\Exception $e){
+            report($e);
             $this->response['status'] = false;
             $this->response['msg'] = 'Payment not completed';
             $this->response['ResponseText'] = $e->getMessage();
