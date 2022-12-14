@@ -72,7 +72,11 @@ class PaymentCompleteJsonHelper {
         }
         $paymentCompleteResponse->setResponseCode($responseData['responseData']['responseCode']);
         $paymentCompleteResponse->setResponseText($responseData['responseData']['responseText']);
-        $paymentCompleteResponse->setSettlementDate($responseData['responseData']['settlementDate']);
+        
+        if (!empty($responseData['responseData']['settlementDate'])) {
+            $paymentCompleteResponse->setSettlementDate($responseData['responseData']['settlementDate']);
+        }
+
         if(isset($responseData['responseData']['token']))
         {
         $paymentCompleteResponse->setToken($responseData['responseData']['token']);
