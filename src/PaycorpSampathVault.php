@@ -130,12 +130,12 @@ class PaycorpSampathVault
             $this->response['ResponseCode'] = $completeResponse->getResponseCode();
             $this->response['ClientID'] = $completeResponse->getClientId();
             $this->response['TransactionType'] = $completeResponse->getTransactionType();
-            $this->response['CardType'] = $completeResponse->getCreditCard()->getCardType();
+            $this->response['CardType'] = $completeResponse->getCreditCard()->getType();
             $this->response['CardNumber'] = $completeResponse->getCreditCard()->getNumber();
-            $this->response['CardHolderName'] = $completeResponse->getCreditCard()->getCardHolderName();
+            $this->response['CardHolderName'] = $completeResponse->getCreditCard()->getHolderName();
             $this->response['ExpireAt'] = $completeResponse->getCreditCard()->getExpiry();
             $this->response['ClientRef'] = $completeResponse->getClientRef();
-            $this->response['PaymentAmount'] = $completeResponse->getPaymentAmount();
+            $this->response['TransactionAmount'] = $completeResponse->getTransactionAmount();
             $this->response['Comment'] = $completeResponse->getComment();
             $this->response['TxnReference'] = $completeResponse->getTxnReference();
             $this->response['ResponseText'] = $completeResponse->getResponseText();
