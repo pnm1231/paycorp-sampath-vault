@@ -31,7 +31,7 @@ class PaycorpSampathVault
 
         $this->client = new GatewayClient($this->clientConfig);
 
-        $this->returnUrl = config('paycorp-sampath-vault.return_url');;
+        $this->returnUrl = config('paycorp-sampath-vault.return_url');
         $this->clientId = config('paycorp-sampath-vault.client_id');
         $this->currency = config('paycorp-sampath-vault.currency');
 
