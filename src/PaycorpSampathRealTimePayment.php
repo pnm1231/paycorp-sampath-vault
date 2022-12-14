@@ -11,53 +11,49 @@ use createch\PaycorpSampathVault\Paycorplib\GatewayClientEnums\TransactionType;
 
 class PaycorpSampathRealTimePayment
 {
-
     private $client;
     private $clientConfig;
-    private $returnUrl;
-    private $clientIdTokenize;
-    private $clientIdPurchase;
+    private $clientId;
     private $currency;
     private $response = [];
 
     public function __construct()
     {
         $this->clientConfig = new ClientConfig();
-        $this->clientConfig->setServiceEndpoint(env('SAMPATH_SERVICE_ENDPOINT', ''));
-        $this->clientConfig->setAuthToken(env('SAMPATH_AUTHTOKEN',''));
-        $this->clientConfig->setHmacSecret(env('SAMPATH_HMAC',''));
+
+        $this->clientConfig->setServiceEndpoint(config('paycorp-sampath-vault.service_endpoint'));
+        $this->clientConfig->setAuthToken(config('paycorp-sampath-vault.auth_token'));
+        $this->clientConfig->setHmacSecret(config('paycorp-sampath-vault.hmac_secret'));
 
         $this->client = new GatewayClient($this->clientConfig);
 
-        $this->returnUrl = env('SAMPATH_RETURN_URL','');
-        $this->clientIdTokenize = env('SAMPATH_TOKENIZE_CLIENT_ID','');
-        $this->clientIdPurchase = env('SAMPATH_PURCHASE_CLIENT_ID','');
-        $this->currency = env('SAMPATH_CURRENCY','');
+        $this->clientId = config('paycorp-sampath-vault.client_id');
+        $this->currency = config('paycorp-sampath-vault.currency');
 
     }
 
-    public function realTimePayment($data){
-
-        try{
-
+    public function realTimePayment(array $data)
+    {
+        try {
             $creditCard = new CreditCard();
+
             $creditCard->setType($data['card_type']); //VISA, MASTER
             $creditCard->setHolderName($data['card_holder_name']);
             $creditCard->setExpiry($data['expire_at']);
             $creditCard->setNumber($data['card_number']);
             $creditCard->setSecureId($data['secure_id']);
-            $creditCard->setSecureIdSupplied(TRUE);
+            $creditCard->setSecureIdSupplied(true);
 
             $realTimeRequest = new PaymentRealTimeRequest();
-            $realTimeRequest->setClientId($this->clientIdPurchase);
+            $realTimeRequest->setClientId($this->clientId);
             $realTimeRequest->setTransactionType(TransactionType::$PURCHASE);
             $realTimeRequest->setCreditCard($creditCard);
 
             $transactionAmount = new TransactionAmount($data['amount']);
             $transactionAmount->setCurrency($this->currency);
             $realTimeRequest->setTransactionAmount($transactionAmount);
-            $realTimeRequest->setClientRef($data['clientRef'] ? $data['clientRef'] : '');
-            $realTimeRequest->setComment($data['comment'] ? $data['comment']: '');
+            $realTimeRequest->setClientRef($data['clientRef'] ?: '');
+            $realTimeRequest->setComment($data['comment'] ?: '');
             $realTimeResponse = $this->client->getPayment()->realTime($realTimeRequest);
 
             $this->response['TxnReference'] = $realTimeResponse->getTxnReference();
@@ -66,17 +62,11 @@ class PaycorpSampathRealTimePayment
             $this->response['SettlementDate'] = $realTimeResponse->getSettlementDate();
             $this->response['AuthCode'] = $realTimeResponse->getAuthCode();
             $this->response['status'] = true;
-
-            return $this->response;
-
         }catch(\Exception $e){
-
             $this->response['status'] = false;
             $this->response['msg'] = $e->getMessage();
-
-            return $this->response;
         }
 
+        return $this->response;
     }
-
 }

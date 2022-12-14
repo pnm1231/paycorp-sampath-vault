@@ -10,13 +10,10 @@ namespace createch\PaycorpSampathVault;
 
 use Illuminate\Support\Facades\Facade;
 
-
 class PaycorpSampathVaultFacade extends Facade
 {
-
     protected static function getFacadeAccessor()
     {
         return 'paycorp-sampath-vault';
     }
-
 }

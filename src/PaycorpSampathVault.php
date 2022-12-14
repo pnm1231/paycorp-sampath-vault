@@ -12,49 +12,47 @@ use createch\PaycorpSampathVault\Paycorplib\GatewayClientComponent\TransactionAm
 use createch\PaycorpSampathVault\Paycorplib\GatewayClientEnums\TransactionType;
 use createch\PaycorpSampathVault\Paycorplib\GatewayClientComponent\Redirect;
 
-
 class PaycorpSampathVault
 {
     private $client;
     private $clientConfig;
     private $returnUrl;
-    private $clientIdTokenize;
-    private $clientIdPurchase;
+    private $clientId;
     private $currency;
     private $response = [];
 
     public function __construct()
     {
         $this->clientConfig = new ClientConfig();
-        $this->clientConfig->setServiceEndpoint(env('SAMPATH_SERVICE_ENDPOINT', ''));
-        $this->clientConfig->setAuthToken(env('SAMPATH_AUTHTOKEN',''));
-        $this->clientConfig->setHmacSecret(env('SAMPATH_HMAC',''));
+
+        $this->clientConfig->setServiceEndpoint(config('paycorp-sampath-vault.service_endpoint'));
+        $this->clientConfig->setAuthToken(config('paycorp-sampath-vault.auth_token'));
+        $this->clientConfig->setHmacSecret(config('paycorp-sampath-vault.hmac_secret'));
 
         $this->client = new GatewayClient($this->clientConfig);
 
-        $this->returnUrl = env('SAMPATH_RETURN_URL','');
-        $this->clientIdTokenize = env('SAMPATH_TOKENIZE_CLIENT_ID','');
-        $this->clientIdPurchase = env('SAMPATH_PURCHASE_CLIENT_ID','');
-        $this->currency = env('SAMPATH_CURRENCY','');
+        $this->returnUrl = config('paycorp-sampath-vault.return_url');;
+        $this->clientId = config('paycorp-sampath-vault.client_id');
+        $this->currency = config('paycorp-sampath-vault.currency');
 
     }
 
-    public function IPGLoaded(){
-        return "1.0.0.1";
+    public function IPGLoaded()
+    {
+        return '1.0.0.1';
     }
 
-    public function initRequest($data){
-
-        try{
-
+    public function initRequest(array $data)
+    {
+        try {
             $initRequest = new PaymentInitRequest();
 
-            $initRequest->setClientId($this->clientIdTokenize);
+            $initRequest->setClientId($this->clientId);
             $initRequest->setTransactionType(TransactionType::$PURCHASE);
             $initRequest->setClientRef($data['clientRef'] ? $data['clientRef'] : '');
             $initRequest->setComment($data['comment'] ? $data['comment']: '');
-            $initRequest->setTokenize(TRUE);
-//        $initRequest->setExtraData(array("msisdn" => "$msisdn", "sessionId" => "$sessionId"));
+            $initRequest->setTokenize(config('paycorp-sampath-vault.tokenize'));
+            //$initRequest->setExtraData(array("msisdn" => "$msisdn", "sessionId" => "$sessionId"));
 
             $transactionAmount = new TransactionAmount($data['total_amount']);
             $transactionAmount->setTotalAmount($data['total_amount']);
@@ -64,84 +62,68 @@ class PaycorpSampathVault
             $initRequest->setTransactionAmount($transactionAmount);
 
             $redirect = new Redirect($this->returnUrl);
-            $redirect->setReturnMethod("GET");
+            $redirect->setReturnMethod('GET');
             $initRequest->setRedirect($redirect);
 
             $initResponse = $this->client->getPayment()->init($initRequest);
 
-            if($initResponse->getReqid() != NULL){
-
+            if ($initResponse->getReqid() !== null) {
                 $this->response['reqid'] = $initResponse->getReqid();
                 $this->response['payment_page_url'] = $initResponse->getPaymentPageUrl();
                 $this->response['status'] = true;
-
-                return $this->response;
-            }else{
-
+            } else {
                 $this->response['status'] = false;
-                $this->response['msg'] = "Payment init request failed";
-
-                return $this->response;
+                $this->response['msg'] = 'Payment init request failed';
             }
-
-        }catch (\Exception $e){
-
+        } catch (\Exception $e) {
             $this->response['status'] = false;
             $this->response['msg'] = $e->getMessage();
-
-            return $this->response;
         }
 
+        return $this->response;
     }
 
-    public function realTimePayment($data){
-
-        try{
-
+    public function realTimePayment(array $data)
+    {
+        try {
             $creditCard = new CreditCard();
             $creditCard->setNumber($data['token']);
             $creditCard->setExpiry($data['expire_at']);
 
             $realTimeRequest = new PaymentRealTimeRequest();
-            $realTimeRequest->setClientId($this->clientIdPurchase);
+            $realTimeRequest->setClientId($this->clientId);
             $realTimeRequest->setTransactionType(TransactionType::$PURCHASE);
             $realTimeRequest->setCreditCard($creditCard);
 
-//            $extraData = array("invoice-no" => "I99999", "job-no" => "J10101");
-//            $realTimeRequest->setExtraData($extraData);
+            //$extraData = array("invoice-no" => "I99999", "job-no" => "J10101");
+            //$realTimeRequest->setExtraData($extraData);
 
             $transactionAmount = new TransactionAmount($data['amount']);
             $transactionAmount->setCurrency($this->currency);
             $realTimeRequest->setTransactionAmount($transactionAmount);
-            $realTimeRequest->setClientRef($data['clientRef'] ? $data['clientRef'] : '');
-            $realTimeRequest->setComment($data['comment'] ? $data['comment']: '');
+            $realTimeRequest->setClientRef($data['clientRef'] ?: '');
+            $realTimeRequest->setComment($data['comment'] ?: '');
             $realTimeResponse = $this->client->getPayment()->realTime($realTimeRequest);
 
-            $this->response['TxnReference'] = $realTimeResponse->getTxnReference()?:"";
-            $this->response['ResponseCode'] = $realTimeResponse->getResponseCode()?:"";
-            $this->response['ResponseText'] = $realTimeResponse->getResponseText()?:"";
-            $this->response['SettlementDate'] = $realTimeResponse->getSettlementDate()?:"";
-            $this->response['AuthCode'] = $realTimeResponse->getAuthCode()?:"";
+            $this->response['TxnReference'] = $realTimeResponse->getTxnReference() ?: '';
+            $this->response['ResponseCode'] = $realTimeResponse->getResponseCode() ?: '';
+            $this->response['ResponseText'] = $realTimeResponse->getResponseText() ?: '';
+            $this->response['SettlementDate'] = $realTimeResponse->getSettlementDate() ?: '';
+            $this->response['AuthCode'] = $realTimeResponse->getAuthCode() ?: '';
             $this->response['status'] = true;
-
-            return $this->response;
-
-        }catch(\Exception $e){
-
+        } catch(\Exception $e) {
             $this->response['status'] = false;
             $this->response['msg'] = $e->getMessage();
-
-            return $this->response;
         }
 
+        return $this->response;
     }
 
-    public function completeRequest($data){
-
-        try{
-
+    public function completeRequest(array $data)
+    {
+        try {
             $completeRequest = new PaymentCompleteRequest();
-            $completeRequest->setClientId($this->clientIdTokenize);
+            $completeRequest->setClientId($this->clientId);
             $completeRequest->setReqid($data['reqid']);
 
             $completeResponse = $this->client->getPayment()->complete($completeRequest);
@@ -159,15 +141,12 @@ class PaycorpSampathVault
             $this->response['ExtraData'] = $completeResponse->getExtraData();
             $this->response['Token'] = $completeResponse->getToken();
             $this->response['status'] = true;
-
-            return $this->response;
-
         }catch (\Exception $e){
-
             $this->response['status'] = false;
             $this->response['msg'] = "Payment not completed";
             $this->response['ResponseText'] = $e->getMessage();
         }
 
+        return $this->response;
     }
 }
