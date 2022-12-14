@@ -73,9 +73,7 @@ class PaymentCompleteJsonHelper {
         $paymentCompleteResponse->setResponseCode($responseData['responseData']['responseCode']);
         $paymentCompleteResponse->setResponseText($responseData['responseData']['responseText']);
 
-        if (!empty($responseData['responseData']['settlementDate'])) {
-            $paymentCompleteResponse->setSettlementDate($responseData['responseData']['settlementDate']);
-        }
+        $paymentCompleteResponse->setSettlementDate(isset($responseData['responseData']['settlementDate']) ? $responseData['responseData']['settlementDate'] : '');
 
         if(isset($responseData['responseData']['token']))
         {
@@ -94,8 +92,8 @@ class PaymentCompleteJsonHelper {
         {
             $paymentCompleteResponse->setTokenResponseText("");
         }
-        $paymentCompleteResponse->setAuthCode($responseData['responseData']['authCode']);
-        $paymentCompleteResponse->setCvcResponse($responseData['responseData']['cvcResponse']);
+        $paymentCompleteResponse->setAuthCode(isset($responseData['responseData']['authCode']) ? $responseData['responseData']['authCode'] : '');
+        $paymentCompleteResponse->setCvcResponse(isset($responseData['responseData']['cvcResponse']) ? $responseData['responseData']['cvcResponse'] : '');
 
         return $paymentCompleteResponse;
     }
