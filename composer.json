@@ -1,9 +1,13 @@
 {
-    "name": "createch/paycorp-sampath-vault",
-    "description": "Paycorp Sampath bank IPG package for Vault realtime payment",
+    "name": "pnm1231/paycorp-sampath-ipg",
+    "description": "Paycorp Sampath Bank IPG package for Laravel",
     "type": "library",
     "license": "MIT",
     "authors": [
+        {
+            "name": "Prasad Nayanajith",
+            "email": "prasadnmanage@gmail.com"
+        },
         {
             "name": "Thiraj Priyadarshana",
             "email": "thirajpriyadharshana@gmail.com"
@@ -12,7 +16,7 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "createch\\PaycorpSampathVault\\": "src"
+            "pnm1231\\PaycorpSampathVault\\": "src"
         }
     },
     "require-dev": {
@@ -21,7 +25,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "createch\\PaycorpSampathVault\\Test\\": "tests/"
+            "pnm1231\\PaycorpSampathVault\\Test\\": "tests/"
         }
     },
     "minimum-stability": "dev",
