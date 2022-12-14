@@ -1,5 +1,5 @@
 <?php
-namespace createch\PaycorpSampathVault\Paycorplib\GatewayClientPayment;
+namespace pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientPayment;
 
 class PaymentInitResponse {
 

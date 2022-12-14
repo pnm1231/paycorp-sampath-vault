@@ -1,13 +1,13 @@
 <?php
 
-namespace createch\PaycorpSampathVault;
+namespace pnm1231\PaycorpSampathVault;
 
-use createch\PaycorpSampathVault\Paycorplib\GatewayClient\GatewayClient;
-use createch\PaycorpSampathVault\Paycorplib\GatewayClientConfig\ClientConfig;
-use createch\PaycorpSampathVault\Paycorplib\GatewayClientPayment\PaymentRealTimeRequest;
-use createch\PaycorpSampathVault\Paycorplib\GatewayClientComponent\CreditCard;
-use createch\PaycorpSampathVault\Paycorplib\GatewayClientComponent\TransactionAmount;
-use createch\PaycorpSampathVault\Paycorplib\GatewayClientEnums\TransactionType;
+use pnm1231\PaycorpSampathVault\Paycorplib\GatewayClient\GatewayClient;
+use pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientConfig\ClientConfig;
+use pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientPayment\PaymentRealTimeRequest;
+use pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientComponent\CreditCard;
+use pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientComponent\TransactionAmount;
+use pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientEnums\TransactionType;
 
 class PaycorpSampathRealTimePayment
 {
@@ -29,7 +29,6 @@ class PaycorpSampathRealTimePayment
 
         $this->clientId = config('paycorp-sampath-vault.client_id');
         $this->currency = config('paycorp-sampath-vault.currency');
-
     }
 
     public function realTimePayment(array $data)

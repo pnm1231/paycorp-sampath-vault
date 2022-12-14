@@ -1,9 +1,9 @@
 <?php
-namespace createch\PaycorpSampathVault\Paycorplib\GatewayClientComponent;
+namespace pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientComponent;
 
-use createch\PaycorpSampathVault\Paycorplib\GatewayClientComponent\CreditCard;
-use createch\PaycorpSampathVault\Paycorplib\GatewayClientComponent\TransactionAmount;
-use createch\PaycorpSampathVault\Paycorplib\GatewayClientEnums\TransactionType;
+use pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientComponent\CreditCard;
+use pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientComponent\TransactionAmount;
+use pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientEnums\TransactionType;
 
 class CreditTransaction {
 

@@ -1,5 +1,5 @@
 <?php
-namespace createch\PaycorpSampathVault\Paycorplib\GatewayClientHelpers;
+namespace pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientHelpers;
 
 class PaymentBatchJsonHelper {
     

@@ -1,12 +1,12 @@
 <?php
-namespace createch\PaycorpSampathVault\Paycorplib\GatewayClientFacade;
+namespace pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientFacade;
 
-use createch\PaycorpSampathVault\Paycorplib\GatewayClientFacade\BaseFacade;
-use createch\PaycorpSampathVault\Paycorplib\GatewayClientHelpers\PaymentRealTimeJsonHelper;
-use createch\PaycorpSampathVault\Paycorplib\GatewayClientHelpers\PaymentInitJsonHelper;
-use createch\PaycorpSampathVault\Paycorplib\GatewayClientHelpers\PaymentCompleteJsonHelper;
-use createch\PaycorpSampathVault\Paycorplib\GatewayClientHelpers\PaymentBatchJsonHelper;
-use createch\PaycorpSampathVault\Paycorplib\GatewayClientEnums\Operation;
+use pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientFacade\BaseFacade;
+use pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientHelpers\PaymentRealTimeJsonHelper;
+use pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientHelpers\PaymentInitJsonHelper;
+use pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientHelpers\PaymentCompleteJsonHelper;
+use pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientHelpers\PaymentBatchJsonHelper;
+use pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientEnums\Operation;
 
 final class Payment extends BaseFacade {
 

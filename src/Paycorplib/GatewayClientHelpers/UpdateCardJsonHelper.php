@@ -1,8 +1,8 @@
 <?php
-namespace createch\PaycorpSampathVault\Paycorplib\GatewayClientHelpers;
+namespace pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientHelpers;
 
-use createch\PaycorpSampathVault\Paycorplib\GatewayClientUtils\IJsonHelper;
-use createch\PaycorpSampathVault\Paycorplib\GatewayClientVault\UpdateCardResponse;
+use pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientUtils\IJsonHelper;
+use pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientVault\UpdateCardResponse;
 
 class UpdateCardJsonHelper implements IJsonHelper {
 

@@ -1,9 +1,9 @@
 <?php
-namespace createch\PaycorpSampathVault\Paycorplib\GatewayClient;
+namespace pnm1231\PaycorpSampathVault\Paycorplib\GatewayClient;
 
-use createch\PaycorpSampathVault\Paycorplib\GatewayClientConfig\ClientConfig;
-use createch\PaycorpSampathVault\Paycorplib\GatewayClientFacade\Payment;
-use createch\PaycorpSampathVault\Paycorplib\GatewayClientFacade\Vault;
+use pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientConfig\ClientConfig;
+use pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientFacade\Payment;
+use pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientFacade\Vault;
 
 class GatewayClient {
     

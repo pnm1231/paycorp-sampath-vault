@@ -1,10 +1,10 @@
 <?php
-namespace createch\PaycorpSampathVault\Paycorplib\GatewayClientFacade;
+namespace pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientFacade;
 
-use createch\PaycorpSampathVault\Paycorplib\GatewayClientUtils\RestClient;
-use createch\PaycorpSampathVault\Paycorplib\GatewayClientUtils\HmacUtils;
-use createch\PaycorpSampathVault\Paycorplib\GatewayClientRoot\PaycorpRequest;
-use createch\PaycorpSampathVault\Paycorplib\GatewayClientComponent\RequestHeader;
+use pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientUtils\RestClient;
+use pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientUtils\HmacUtils;
+use pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientRoot\PaycorpRequest;
+use pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientComponent\RequestHeader;
 
 abstract class BaseFacade {
 

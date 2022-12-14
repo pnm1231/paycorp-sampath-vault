@@ -1,5 +1,5 @@
 <?php
-namespace createch\PaycorpSampathVault\Paycorplib\GatewayClientEnums;
+namespace pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientEnums;
 
 class DateType {
     

@@ -1,5 +1,5 @@
 <?php
-namespace createch\PaycorpSampathVault\Paycorplib\GatewayClientConfig;
+namespace pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientConfig;
 
 class ClientConfig {
 

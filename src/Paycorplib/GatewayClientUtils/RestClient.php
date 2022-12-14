@@ -1,5 +1,5 @@
 <?php
-namespace createch\PaycorpSampathVault\Paycorplib\GatewayClientUtils;
+namespace pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientUtils;
 
 class RestClient {
     

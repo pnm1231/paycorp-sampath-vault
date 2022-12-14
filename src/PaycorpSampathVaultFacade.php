@@ -6,7 +6,7 @@
  * Time: 2:56 PM
  */
 
-namespace createch\PaycorpSampathVault;
+namespace pnm1231\PaycorpSampathVault;
 
 use Illuminate\Support\Facades\Facade;
 

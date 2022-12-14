@@ -1,6 +1,6 @@
 <?php
 
-namespace createch\PaycorpSampathVault;
+namespace pnm1231\PaycorpSampathVault;
 use Illuminate\Support\ServiceProvider;
 
 class PaycorpSampathVaultServiceProvider extends ServiceProvider

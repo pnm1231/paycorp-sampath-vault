@@ -1,5 +1,5 @@
 <?php
-namespace createch\PaycorpSampathVault\Paycorplib\GatewayClientVault;
+namespace pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientVault;
 
 class StoreCardRequest {
 

@@ -1,8 +1,8 @@
 <?php
-namespace createch\PaycorpSampathVault\Paycorplib\GatewayClientRoot;
+namespace pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientRoot;
 
-use createch\PaycorpSampathVault\Paycorplib\GatewayClientEnums\Version;
-use createch\PaycorpSampathVault\Paycorplib\GatewayClientUtils\CommonUtils;
+use pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientEnums\Version;
+use pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientUtils\CommonUtils;
 
 class PaycorpRequest {
 

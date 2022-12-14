@@ -1,16 +1,16 @@
 <?php
 
-namespace createch\PaycorpSampathVault;
+namespace pnm1231\PaycorpSampathVault;
 
-use createch\PaycorpSampathVault\Paycorplib\GatewayClient\GatewayClient;
-use createch\PaycorpSampathVault\Paycorplib\GatewayClientConfig\ClientConfig;
-use createch\PaycorpSampathVault\Paycorplib\GatewayClientPayment\PaymentRealTimeRequest;
-use createch\PaycorpSampathVault\Paycorplib\GatewayClientPayment\PaymentInitRequest;
-use createch\PaycorpSampathVault\Paycorplib\GatewayClientPayment\PaymentCompleteRequest;
-use createch\PaycorpSampathVault\Paycorplib\GatewayClientComponent\CreditCard;
-use createch\PaycorpSampathVault\Paycorplib\GatewayClientComponent\TransactionAmount;
-use createch\PaycorpSampathVault\Paycorplib\GatewayClientEnums\TransactionType;
-use createch\PaycorpSampathVault\Paycorplib\GatewayClientComponent\Redirect;
+use pnm1231\PaycorpSampathVault\Paycorplib\GatewayClient\GatewayClient;
+use pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientConfig\ClientConfig;
+use pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientPayment\PaymentRealTimeRequest;
+use pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientPayment\PaymentInitRequest;
+use pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientPayment\PaymentCompleteRequest;
+use pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientComponent\CreditCard;
+use pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientComponent\TransactionAmount;
+use pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientEnums\TransactionType;
+use pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientComponent\Redirect;
 
 class PaycorpSampathVault
 {
@@ -34,7 +34,6 @@ class PaycorpSampathVault
         $this->returnUrl = config('paycorp-sampath-vault.return_url');
         $this->clientId = config('paycorp-sampath-vault.client_id');
         $this->currency = config('paycorp-sampath-vault.currency');
-
     }
 
     public function IPGLoaded()
@@ -49,8 +48,8 @@ class PaycorpSampathVault
 
             $initRequest->setClientId($this->clientId);
             $initRequest->setTransactionType(TransactionType::$PURCHASE);
-            $initRequest->setClientRef($data['clientRef'] ? $data['clientRef'] : '');
-            $initRequest->setComment($data['comment'] ? $data['comment']: '');
+            $initRequest->setClientRef($data['clientRef'] ?: '');
+            $initRequest->setComment($data['comment'] ?: '');
             $initRequest->setTokenize(config('paycorp-sampath-vault.tokenize'));
             //$initRequest->setExtraData(array("msisdn" => "$msisdn", "sessionId" => "$sessionId"));
 
@@ -119,12 +118,12 @@ class PaycorpSampathVault
         return $this->response;
     }
 
-    public function completeRequest(array $data)
+    public function completeRequest($requestId)
     {
         try {
             $completeRequest = new PaymentCompleteRequest();
             $completeRequest->setClientId($this->clientId);
-            $completeRequest->setReqid($data['reqid']);
+            $completeRequest->setReqid($requestId);
 
             $completeResponse = $this->client->getPayment()->complete($completeRequest);
 
@@ -143,7 +142,7 @@ class PaycorpSampathVault
             $this->response['status'] = true;
         }catch (\Exception $e){
             $this->response['status'] = false;
-            $this->response['msg'] = "Payment not completed";
+            $this->response['msg'] = 'Payment not completed';
             $this->response['ResponseText'] = $e->getMessage();
         }
 

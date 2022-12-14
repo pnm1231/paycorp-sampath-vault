@@ -1,9 +1,9 @@
 <?php
-namespace createch\PaycorpSampathVault\Paycorplib\GatewayClientHelpers;
+namespace pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientHelpers;
 
-use createch\PaycorpSampathVault\Paycorplib\GatewayClientPayment\PaymentCompleteResponse;
-use createch\PaycorpSampathVault\Paycorplib\GatewayClientComponent\CreditCard;
-use createch\PaycorpSampathVault\Paycorplib\GatewayClientComponent\TransactionAmount;
+use pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientPayment\PaymentCompleteResponse;
+use pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientComponent\CreditCard;
+use pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientComponent\TransactionAmount;
 
 class PaymentCompleteJsonHelper {
 

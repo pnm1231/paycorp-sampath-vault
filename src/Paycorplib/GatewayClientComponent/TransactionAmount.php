@@ -1,5 +1,5 @@
 <?php
-namespace createch\PaycorpSampathVault\Paycorplib\GatewayClientComponent;
+namespace pnm1231\PaycorpSampathVault\Paycorplib\GatewayClientComponent;
 
 class TransactionAmount {
 
