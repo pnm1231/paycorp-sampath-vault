@@ -48,8 +48,8 @@ class PaycorpSampathVault
 
             $initRequest->setClientId($this->clientId);
             $initRequest->setTransactionType(TransactionType::$PURCHASE);
-            $initRequest->setClientRef($data['clientRef'] ?: '');
-            $initRequest->setComment($data['comment'] ?: '');
+            $initRequest->setClientRef(!empty($data['clientRef']) ? $data['clientRef'] : '');
+            $initRequest->setComment(!empty($data['comment']) ? $data['comment'] : '');
             $initRequest->setTokenize(config('paycorp-sampath-vault.tokenize'));
             //$initRequest->setExtraData(array("msisdn" => "$msisdn", "sessionId" => "$sessionId"));
 
