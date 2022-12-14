@@ -1,23 +1,23 @@
-# Paycorp-Sampath-Vault (Laravel)
+# Paycorp Sampath IPG for Laravel
 
 
-Paycorp-Sampath-Vault is a php package for making payment using Sampath bank Payment Gateway in Laravel and PHP Projects. This uses the PHP library of Sampath bank. In this package you can make:
+Paycorp Sampath IPG is a Laravel package for making payment using Sampath Bank Payment Gateway through Paycorp. In this package you can accept:
 
-  - Redirect Page Payment
-  - Realtime Payment
-  - Tokanized Payments
+  - Redirect Page Payments
+  - Realtime Payments
+  - Tokenized Payments
 
-# Features!
+# Features
 
   - Using with composer
-  - Easy intergration
+  - Easy integration
   - Compatible with Laravel
 
 # Requirements
 
 > PHP >= 5.6
 > OpenSSL >= 1.0.1
-> CUrl >= 7.34
+> curl >= 7.34
 > Composer
 
 # Usage
@@ -26,7 +26,7 @@ Paycorp-Sampath-Vault is a php package for making payment using Sampath bank Pay
 
 
 ```sh
-$ composer require createch/paycorp-sampath-vault
+composer require pnm1231/paycorp-sampath-ipg
 ```
 
 ### Configurations
@@ -40,8 +40,7 @@ SAMPATH_SERVICE_ENDPOINT=
 SAMPATH_AUTHTOKEN=
 SAMPATH_HMAC=
 SAMPATH_CURRENCY=
-SAMPATH_TOKENIZE_CLIENT_ID=
-SAMPATH_PURCHASE_CLIENT_ID=
+SAMPATH_CLIENT_ID=
 SAMPATH_RETURN_URL=
 ```
 
@@ -52,14 +51,14 @@ SAMPATH_RETURN_URL=
 Import package class in you class header:
 
 ```sh
-use createch\PaycorpSampathVault\PaycorpSampathVault;
+use pnm123\PaycorpSampathVault\PaycorpSampathVault;
 ```
 Sample InitRequest
 
 ```sh
     $paymentInit = new PaycorpSampathVault();
     $data['clientRef'] = $request->user()->id;
-    $data['comment'] = "Your comment";
+    $data['comment'] = 'Your comment';
     $data['total_amount'] = 1010;
     $data['service_fee_amount'] = 1010;
     $data['payment_amount'] = 1010;
@@ -83,17 +82,17 @@ You will receive reqid, payment_page_url for the redirect. When you redirected t
 
 #### Make Real Time Payments using Token
 
-In Payment complete response you will get the "Token" and neccessary data. Using "Token" you can make instant payments without entering card details or redirecting user everytime to payment page. This is the special feature of Vault in paycorp.
+In Payment complete response you will get the "Token" and necessary data. Using "Token" you can make instant payments without entering card details or redirecting user everytime to payment page. This is the special feature of Vault in paycorp.
 
 ```sh
     $payment = new PaycorpSampathVault();
 
     $data = [];
-    $data['clientRef'] = "Clent Ref";
-    $data['token'] = "token";
-    $data['comment'] = "Your Comment";
+    $data['clientRef'] = 'Clent Ref';
+    $data['token'] = 'token';
+    $data['comment'] = 'Your Comment';
     $data['amount'] = 1010; // in cents
-    $data['expire_at'] = "Expiry Date of Card"; //1223
+    $data['expire_at'] = 'Expiry Date of Card'; //1223
     $data['payment_amount'] = 1010;
     $response = $payment->realTimePayment($data);
     
